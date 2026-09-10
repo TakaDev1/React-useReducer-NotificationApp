@@ -12,4 +12,4 @@ type Action =
   | { type: "add"; message: string; nType: NotificationType }
   | { type: "remove"; id: string };
 
-export type { Notification, State, Action };
+export type { NotificationType, Notification, State, Action };
