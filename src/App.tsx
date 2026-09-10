@@ -6,6 +6,7 @@ import { NotificationProvider } from "./feature/contexts/NotificationContext";
 function App() {
   return (
     <div>
+      <h1>React-useReducer-NotificationApp</h1>
       <NotificationProvider>
         <div>
           <NotificationList />
