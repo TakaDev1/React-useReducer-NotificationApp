@@ -19,7 +19,10 @@ const NotificationList = () => {
       {state.length > 0 ? (
         <ul>
           {state.map((notification) => (
-            <li key={notification.id}>{notification.message}</li>
+            <li key={notification.id}>
+              {notification.message}{" "}
+              <button onClick={() => handleRemove(notification.id)}>×</button>{" "}
+            </li>
           ))}
         </ul>
       ) : (
