@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, type Dispatch } from "react";
+import React, { createContext, useContext, useReducer, type Dispatch } from "react";
 import type { Action, State } from "../types/NotificationType";
 import NotificationReducer from "../reducers/NotificationReducer";
 
@@ -20,7 +20,7 @@ const NotificationProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 const useNotification = () => {
-  const context = createContext(NotificationContext);
+  const context = useContext(NotificationContext);
 
   if (!context) {
     throw new Error("NotificatoinContextの範囲外です");
