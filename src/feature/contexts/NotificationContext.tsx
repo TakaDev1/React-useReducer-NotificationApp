@@ -12,7 +12,11 @@ const NotificationContext = createContext<NotificationContextInterface | undefin
 const NotificationProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(NotificationReducer, [] as State);
 
-  return <NotificationProvider>{children}</NotificationProvider>;
+  return (
+    <NotificationContext.Provider value={{ state, dispatch }}>
+      {children}
+    </NotificationContext.Provider>
+  );
 };
 
 const useNotification = () => {
