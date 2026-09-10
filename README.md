@@ -1,32 +1,108 @@
-# React + TypeScript + Vite
+# React-useReducer-NotificationApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Reactの`useReducer`と`useContext`を使用して、複数コンポーネントで通知状態を共有する練習用アプリです。
 
-Currently, two official plugins are available:
+## 概要
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+通知の追加・削除を行える簡易的なNotificationシステムを実装しています。
 
-## React Compiler
+通知状態は`useReducer`で管理し、`useContext`を使用して複数のコンポーネントから共有しています。
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+通知の種類に応じて、TailwindCSSで表示色を変更しています。
 
-## Expanding the Oxlint configuration
+## 使用技術
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+* React
+* TypeScript
+* useReducer
+* useContext
+* TailwindCSS
+* uuid
 
-```json
+## 機能
+
+* 通知の追加
+
+  * Info
+  * Success
+  * Error
+* 通知の削除
+* 通知タイプごとのデザイン変更
+* Contextによる通知状態の共有
+
+## 通知データ
+
+```ts
 {
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
+  id: string;
+  message: string;
+  type: "info" | "error" | "success";
 }
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## アクション
+
+Reducerでは以下のアクションを扱います。
+
+```ts
+type Action =
+  | {
+      type: "add";
+      message: string;
+      nType: NotificationType;
+    }
+  | {
+      type: "remove";
+      id: string;
+    };
+```
+
+## ディレクトリ構成
+
+```text
+src/
+├── App.tsx
+│
+├── components/
+│   ├── ControlPanel.tsx
+│   └── NotificationList.tsx
+│
+├── contexts/
+│   └── NotificationContext.tsx
+│
+├── reducers/
+│   └── NotificationReducer.ts
+│
+└── types/
+    └── NotificationType.ts
+```
+
+## 状態管理
+
+`NotificationContext`で`useReducer`を使用して通知状態を管理しています。
+
+```text
+App
+ ↓
+NotificationProvider
+ ↓
+useReducer
+ ↓
+state / dispatch
+ ↓
+┌─────────────────┐
+│ ControlPanel    │ → add
+│ NotificationList│ → remove
+└─────────────────┘
+```
+
+`ControlPanel`から通知を追加し、`NotificationList`から通知を削除できます。
+
+## 学習目的
+
+* `useReducer`による状態管理
+* `useContext`による状態共有
+* ContextとReducerの分離
+* TypeScriptによるState・Actionの型定義
+* コンポーネントの責務分離
+* TailwindCSSによる条件付きスタイリング
