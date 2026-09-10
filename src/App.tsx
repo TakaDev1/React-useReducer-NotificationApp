@@ -5,7 +5,7 @@ import { NotificationProvider } from "./feature/contexts/NotificationContext";
 
 function App() {
   return (
-    <div>
+    <div className="bg-gray-800 min-h-screen flex flex-col justify-center">
       <h1>React-useReducer-NotificationApp</h1>
       <NotificationProvider>
         <div>

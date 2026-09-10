@@ -10,10 +10,25 @@ const ControlPanel = () => {
   };
 
   return (
-    <div>
-      <button onClick={() => handleAddNotification("情報メッセージ", "info")}>Info</button>
-      <button onClick={() => handleAddNotification("成功しました", "success")}>Success</button>
-      <button onClick={() => handleAddNotification("エラーが発生しました", "error")}>Error</button>
+    <div className="w-1/2 flex mx-auto justify-around">
+      <button
+        onClick={() => handleAddNotification("情報メッセージ", "info")}
+        className="bg-gray-500 w-15 text-white rounded-full py-1 cursor-pointer hover:opacity-80"
+      >
+        Info
+      </button>
+      <button
+        onClick={() => handleAddNotification("成功しました", "success")}
+        className="bg-gray-500 w-20 text-white rounded-full py-1 cursor-pointer hover:opacity-80"
+      >
+        Success
+      </button>
+      <button
+        onClick={() => handleAddNotification("エラーが発生しました", "error")}
+        className="bg-gray-500 w-15 text-white rounded-full py-1 cursor-pointer hover:opacity-80"
+      >
+        Error
+      </button>
     </div>
   );
 };
